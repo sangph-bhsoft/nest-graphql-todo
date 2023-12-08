@@ -3,11 +3,11 @@ import { UserVm } from './models/user-vm.model';
 import { UserService } from './user.service';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '@modules/auth/guards/auth.guard';
-import { Roles } from '@modules/auth/guards/roles.decorator';
+import { Roles } from '@shared/decorators/roles.decorator';
 import { Role } from '@modules/auth/models/role.enum';
 import { RolesGuard } from '@modules/auth/guards/role.guard';
 import { CreateUserDto } from './dto/create-user.dto';
-import { CurrentUser } from '@shared/decoratos/user.decorator';
+import { CurrentUser } from '@shared/decorators/user.decorator';
 
 @Resolver()
 @UseGuards(JwtAuthGuard)
