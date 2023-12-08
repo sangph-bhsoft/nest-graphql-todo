@@ -1,0 +1,58 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""task """
+type Task {
+  id: ID!
+  title: String!
+}
+
+"""UserVm"""
+type UserVm {
+  id: ID!
+  email: String!
+  name: String!
+  role: Role!
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+"""UserVm"""
+type LoginResponseVm {
+  token: String!
+}
+
+type Query {
+  test: String!
+  getAllUser: [UserVm!]!
+}
+
+type Mutation {
+  updateTask: Task!
+  updateTask1: Task!
+  register(registerDto: RegisterDto!): UserVm!
+  login(loginDto: LoginDto!): LoginResponseVm!
+  createUser(createUserDto: CreateUserDto!): UserVm!
+}
+
+input RegisterDto {
+  email: String!
+  password: String!
+  name: String!
+}
+
+input LoginDto {
+  email: String!
+  password: String!
+}
+
+input CreateUserDto {
+  email: String!
+  password: String!
+  name: String!
+  role: Role!
+}
