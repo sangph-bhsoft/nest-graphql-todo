@@ -56,3 +56,7 @@ input CreateUserDto {
   name: String!
   role: Role!
 }
+
+type Subscription {
+  userAdded: UserVm!
+}

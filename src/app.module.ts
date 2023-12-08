@@ -20,6 +20,14 @@ import { classes } from '@automapper/classes';
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       playground: true,
+      subscriptions: {
+        'graphql-ws': {
+          path: '/graphql',
+        },
+        'subscriptions-transport-ws': {
+          path: '/graphql',
+        },
+      },
     }),
     ConfigModule.forRoot({
       isGlobal: true,

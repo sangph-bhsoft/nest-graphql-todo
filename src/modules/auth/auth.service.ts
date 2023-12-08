@@ -45,7 +45,7 @@ export class AuthService {
     });
 
     if (!user) throw new NotFoundException('User not found');
-    const checkPassword = compare(password, (await user).password);
+    const checkPassword = await compare(password, user.password);
     if (!checkPassword) throw new UnauthorizedException('Password invalid');
     return {
       token: this.jwtService.sign({ userId: user.id }),

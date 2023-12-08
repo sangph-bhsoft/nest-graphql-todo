@@ -6,6 +6,7 @@ import { InjectMapper } from '@automapper/nestjs';
 import { Mapper } from '@automapper/core';
 import { UserVm } from './models/user-vm.model';
 import { CreateUserDto } from './dto/create-user.dto';
+import { genSalt, hash } from 'bcryptjs';
 
 @Injectable()
 export class UserService {
@@ -29,9 +30,15 @@ export class UserService {
   async create(payload: CreateUserDto, user: UserVm): Promise<UserVm> {
     console.log({ user });
 
-    const userCreate = this.userRepository.create(payload);
-    const userE = await this.userRepository.save(userCreate);
+    const { email, name, password } = payload;
+    const salt = await genSalt(10);
 
-    return this.mapper.map(userE, UserEntity, UserVm);
+    const hashPassword = await hash(password, salt);
+    const userCreate = this.userRepository.create();
+    userCreate.email = email;
+    userCreate.name = name;
+    userCreate.password = hashPassword;
+    const userSave = await this.userRepository.save(userCreate);
+    return this.mapper.map(userSave, UserEntity, UserVm);
   }
 }
